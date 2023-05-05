@@ -70,6 +70,7 @@
 # Delete existing data, so you'll start fresh each time this script is run.
 # Use `Model.destroy_all` code.
 # TODO!
+
 Studio.destroy_all
 Movie.destroy_all
 Actor.destroy_all
@@ -77,6 +78,8 @@ Role.destroy_all
 
 # Generate models and tables, according to the domain model.
 # TODO!
+
+# added in migrate section > studios, movies, actors, roles
 
 
 # Insert data into the database that reflects the sample data shown above.
@@ -269,8 +272,6 @@ new_role ["actor_id"] = ah ["id"]
 new_role ["character_name"] = "Selina Kyle"
 new_role.save
 
-   
-
 
 # Prints a header for the movies output
 puts "Movies"
@@ -279,8 +280,8 @@ puts ""
 
 # Query the movies data and loop through the results to display the movies output.
 # TODO!
-studio_movies = Movie.where ({"studio_id" => warnerbros ["id"]})
-for movie in studio_movies
+
+for movie in Movie.all
     studio_name = Studio.find_by({ "id" => movie ["studio_id"] }) ["name"]
     puts "#{movie ["title"]} #{movie ["year_released"]} #{movie ["rated"]} #{studio_name}"
 end
@@ -295,9 +296,8 @@ puts ""
 # Query the cast data and loop through the results to display the cast output for each movie.
 # TODO!
 
-movie_cast = Role.all
-for character in movie_cast
+for character in Role.all
     movie_title = Movie.find_by({ "id" => character ["movie_id"] }) ["title"]
     actor_name = Actor.find_by({ "id" => character ["actor_id"] }) ["name"]
-    puts "#{movie_title} #{character ["character_name"]}"
+    puts "#{movie_title} #{actor_name} #{character ["character_name"]}"
 end
